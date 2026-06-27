@@ -305,7 +305,7 @@ export default function Hero() {
       {/* Skills marquee strip */}
       <div className="absolute bottom-0 left-0 right-0 border-t border-white/5 bg-gradient-to-r from-bg-primary via-bg-secondary/60 to-bg-primary py-3">
         <Marquee
-          items={[...portfolioData.expertise, "Adobe Suite", "Figma", "Blender", "After Effects", "Typography", "Brand Strategy"]}
+          items={[...expertise, "Adobe Suite", "Figma", "Blender", "After Effects", "Typography", "Brand Strategy"]}
           speed={40}
           className="opacity-60 hover:opacity-100 transition-opacity duration-500"
         />
