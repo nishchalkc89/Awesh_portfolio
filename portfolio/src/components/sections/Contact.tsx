@@ -6,7 +6,7 @@ import { Mail, Phone, MapPin, Send, Clock, CheckCircle2, ArrowRight, MessageSqua
 import { usePortfolioData } from "@/lib/PortfolioContext";
 
 export default function Contact() {
-  const { personal } = usePortfolioData();
+  const { personal, social } = usePortfolioData();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", subject: "", budget: "", message: "" });
@@ -115,7 +115,7 @@ export default function Contact() {
                   Download Resume
                   <ArrowRight size={14} />
                 </a>
-                {portfolioData.social.slice(0, 3).map((s) => (
+                {social.slice(0, 3).map((s) => (
                   <a
                     key={s.name}
                     href={s.url}
