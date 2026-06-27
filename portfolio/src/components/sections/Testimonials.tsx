@@ -3,11 +3,10 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react";
-import { portfolioData } from "@/lib/data";
-
-const { testimonials } = portfolioData;
+import { usePortfolioData } from "@/lib/PortfolioContext";
 
 export default function Testimonials() {
+  const { testimonials } = usePortfolioData();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [current, setCurrent] = useState(0);

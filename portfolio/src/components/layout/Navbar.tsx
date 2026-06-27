@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { portfolioData } from "@/lib/data";
 
 const navLinks = [
   { label: "Work", href: "#projects" },

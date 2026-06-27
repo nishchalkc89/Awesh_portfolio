@@ -3,11 +3,9 @@
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import { Download, ArrowRight, Sparkles, MapPin } from "lucide-react";
-import { portfolioData } from "@/lib/data";
+import { usePortfolioData } from "@/lib/PortfolioContext";
 import { useCounter } from "@/hooks/useCounter";
 import Marquee from "@/components/ui/Marquee";
-
-const { personal, social, stats, expertise } = portfolioData;
 
 const socialIcons: Record<string, React.ReactNode> = {
   instagram: (
@@ -60,6 +58,7 @@ function StatCard({ stat }: { stat: { label: string; value: number; suffix: stri
 }
 
 export default function Hero() {
+  const { personal, social, stats, expertise } = usePortfolioData();
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden" aria-label="Hero">
       {/* Background orbs */}

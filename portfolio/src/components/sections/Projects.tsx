@@ -4,10 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ExternalLink, ArrowRight, Calendar, User, Star } from "lucide-react";
 import Image from "next/image";
-import { portfolioData } from "@/lib/data";
-
-const { projects } = portfolioData;
-const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
+import { usePortfolioData } from "@/lib/PortfolioContext";
 
 const colorPalette = [
   "from-blue-500/20 to-blue-800/10",
@@ -19,6 +16,8 @@ const colorPalette = [
 ];
 
 export default function Projects() {
+  const { projects } = usePortfolioData();
+  const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [activeFilter, setActiveFilter] = useState("All");

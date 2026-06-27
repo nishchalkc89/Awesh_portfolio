@@ -6,9 +6,7 @@ import {
   Palette, BookOpen, Package, Megaphone, Layers, Camera,
   Clock, ArrowRight, CheckCircle2
 } from "lucide-react";
-import { portfolioData } from "@/lib/data";
-
-const { services } = portfolioData;
+import { usePortfolioData } from "@/lib/PortfolioContext";
 
 const iconMap: Record<string, React.ReactNode> = {
   Palette: <Palette size={24} />,
@@ -38,6 +36,7 @@ const iconColorMap: Record<string, string> = {
 };
 
 export default function Services() {
+  const { services } = usePortfolioData();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 

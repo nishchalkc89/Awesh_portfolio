@@ -3,11 +3,10 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Clock, CheckCircle2, ArrowRight, MessageSquare } from "lucide-react";
-import { portfolioData } from "@/lib/data";
-
-const { personal } = portfolioData;
+import { usePortfolioData } from "@/lib/PortfolioContext";
 
 export default function Contact() {
+  const { personal } = usePortfolioData();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", subject: "", budget: "", message: "" });

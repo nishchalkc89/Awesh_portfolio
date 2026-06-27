@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Heart, ArrowUp } from "lucide-react";
-import { portfolioData } from "@/lib/data";
+import { usePortfolioData } from "@/lib/PortfolioContext";
 
 const socialIcons: Record<string, React.ReactNode> = {
   instagram: (
@@ -28,6 +28,7 @@ const socialIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Footer() {
+  const { personal, social } = usePortfolioData();
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
@@ -43,10 +44,10 @@ export default function Footer() {
               <span className="text-text-muted">.</span>
             </h3>
             <p className="text-text-secondary text-sm leading-relaxed mb-6 max-w-xs">
-              {portfolioData.personal.tagline} Crafting visual identities that endure across every platform.
+              {personal.tagline} Crafting visual identities that endure across every platform.
             </p>
             <div className="flex gap-3">
-              {portfolioData.social.map((s) => (
+              {social.map((s) => (
                 <motion.a
                   key={s.name}
                   href={s.url}
@@ -91,11 +92,11 @@ export default function Footer() {
               Get in Touch
             </h4>
             <div className="space-y-3 text-sm text-text-secondary">
-              <p>{portfolioData.personal.email}</p>
-              <p>{portfolioData.personal.location}</p>
+              <p>{personal.email}</p>
+              <p>{personal.location}</p>
               <p className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse" />
-                {portfolioData.personal.availability}
+                {personal.availability}
               </p>
             </div>
             <motion.button

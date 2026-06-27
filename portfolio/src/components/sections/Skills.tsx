@@ -2,9 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { portfolioData } from "@/lib/data";
-
-const { skills } = portfolioData;
+import { usePortfolioData } from "@/lib/PortfolioContext";
 
 const categories = [
   { key: "design", label: "Design", color: "#3B82F6" },
@@ -51,6 +49,7 @@ function SkillBar({ name, level, color, delay }: { name: string; level: number; 
 }
 
 export default function Skills() {
+  const { skills } = usePortfolioData();
   const [active, setActive] = useState("design");
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });

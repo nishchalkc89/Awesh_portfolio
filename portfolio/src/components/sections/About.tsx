@@ -4,9 +4,7 @@ import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import Image from "next/image";
 import { Briefcase, MapPin, Clock, CheckCircle2, ArrowRight, Download } from "lucide-react";
-import { portfolioData } from "@/lib/data";
-
-const { personal, expertise } = portfolioData;
+import { usePortfolioData } from "@/lib/PortfolioContext";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -18,6 +16,7 @@ const stagger: Variants = {
 };
 
 export default function About() {
+  const { personal, expertise } = usePortfolioData();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
