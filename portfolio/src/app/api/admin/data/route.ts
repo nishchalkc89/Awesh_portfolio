@@ -1,18 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-const DATA_FILE = path.join(process.cwd(), "data", "cms-data.json");
-
-function readData() {
-  if (!fs.existsSync(DATA_FILE)) return null;
-  return JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
-}
-
-function writeData(data: unknown) {
-  fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-}
+import { getDb } from "@/lib/mongodb";
 
 function isAuthenticated(req: NextRequest) {
   return req.cookies.get("admin_token")?.value === "authenticated";
@@ -22,15 +9,29 @@ export async function GET(req: NextRequest) {
   if (!isAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const data = readData();
-  return NextResponse.json(data || {});
+  try {
+    const db = await getDb();
+    const doc = await db.collection("cms").findOne({ key: "main" });
+    return NextResponse.json(doc ? doc.data : {});
+  } catch {
+    return NextResponse.json({ error: "Database error" }, { status: 500 });
+  }
 }
 
 export async function PUT(req: NextRequest) {
   if (!isAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const body = await req.json();
-  writeData(body);
-  return NextResponse.json({ ok: true });
+  try {
+    const body = await req.json();
+    const db = await getDb();
+    await db.collection("cms").updateOne(
+      { key: "main" },
+      { $set: { data: body } },
+      { upsert: true }
+    );
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Database error" }, { status: 500 });
+  }
 }
