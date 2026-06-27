@@ -46,53 +46,48 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="relative order-2 lg:order-1"
           >
-            {/* Main card */}
-            <div className="relative gradient-border rounded-3xl overflow-hidden">
-              {/* Full-width photo at top */}
-              <div className="relative w-full overflow-hidden rounded-t-3xl bg-gradient-to-br from-accent-blue/10 to-accent-purple/10" style={{ height: "300px" }}>
-                <div className="absolute inset-0 flex items-center justify-center text-8xl font-heading font-bold gradient-text select-none opacity-20">AS</div>
-                <Image
-                  src="/1.png"
-                  alt={personal.name}
-                  fill
-                  className="object-cover object-top"
-                  loading="eager"
-                  sizes="500px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/70 via-transparent to-transparent" />
-              </div>
-              <div className="glass rounded-b-3xl p-8 lg:p-10">
-                <h3 className="text-2xl font-heading font-bold text-text-primary mb-2">
+            {/* Main card — full image with overlay */}
+            <div className="relative gradient-border rounded-3xl overflow-hidden" style={{ height: "560px" }}>
+              {/* Full card image */}
+              <Image
+                src="/1.png"
+                alt={personal.name}
+                fill
+                className="object-cover object-top"
+                loading="eager"
+                sizes="560px"
+              />
+
+              {/* Dark gradient overlay bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent" />
+
+              {/* Info overlaid at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-7">
+                <h3 className="text-2xl font-heading font-bold text-text-primary mb-1">
                   {personal.name}
                 </h3>
-                <p className="text-accent-blue font-medium mb-6">{personal.title}</p>
+                <p className="text-accent-blue font-medium mb-4">{personal.title}</p>
 
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3 text-sm text-text-secondary">
-                    <MapPin size={16} className="text-accent-blue flex-shrink-0" />
+                <div className="flex flex-wrap gap-3 mb-4 text-sm text-text-secondary">
+                  <div className="flex items-center gap-1.5">
+                    <MapPin size={14} className="text-accent-blue" />
                     {personal.location}
                   </div>
-                  <div className="flex items-center gap-3 text-sm text-text-secondary">
-                    <Briefcase size={16} className="text-accent-purple flex-shrink-0" />
-                    {personal.yearsExperience}+ years of experience
+                  <div className="flex items-center gap-1.5">
+                    <Briefcase size={14} className="text-accent-purple" />
+                    {personal.yearsExperience}+ yrs experience
                   </div>
-                  <div className="flex items-center gap-3 text-sm text-text-secondary">
-                    <Clock size={16} className="text-accent-cyan flex-shrink-0" />
-                    Response time: Same day
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse flex-shrink-0" />
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse" />
                     <span className="text-accent-emerald font-medium">{personal.availability}</span>
                   </div>
                 </div>
 
-                <div className="h-px bg-white/5 mb-6" />
-
                 <div className="flex flex-wrap gap-2">
-                  {expertise.slice(0, 6).map((exp) => (
+                  {expertise.slice(0, 5).map((exp) => (
                     <span
                       key={exp}
-                      className="px-2.5 py-1 rounded-lg text-xs text-text-secondary glass border border-white/5"
+                      className="px-2.5 py-1 rounded-lg text-xs text-text-secondary bg-white/8 border border-white/10 backdrop-blur-sm"
                     >
                       {exp}
                     </span>
